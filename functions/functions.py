@@ -1,6 +1,6 @@
 
 
-def statusUrl(): 
+def statusUrl(saisie_url): 
     saisieUrl = saisie_url.get()
     http = urllib3.PoolManager()
     reponse = http.request('GET', saisieUrl)
