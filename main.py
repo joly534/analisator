@@ -13,25 +13,23 @@ class PageWeb:
         http = urllib3.PoolManager()
         self.reponse = http.request('GET',self.url)
         self.donnees = self.reponse.data
-        self.donnees.decode('utf-8')
+        self.pageDecode = self.donnees.decode('utf-8')
                
     def getStatus(self):
         status = self.reponse.status
-        print(status)
 
     def parseContent(self):
         i = 0
         j = 0
-        for i in self.donnees:
-            if self.donnees[i] != ">":
-                print("ok pour i")
-                self.balise[j].append(self.donnees[i])
+        for i, char in self.pageDecode:
+            if self.pageDecode[i] != ">":
+                self.balise[j].append(self.pageDecode[i])
                 i += 1
             if self.donnees[i] == ">":
                 self.balise[j].append(self.donnees[i])
                 j += 1
                 i += 1
-            
+        print(self.balise)    
 
 
     def drawContent(self):
