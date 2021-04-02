@@ -9,13 +9,30 @@ from urllib3 import request
 class PageWeb:
     def __init__(self, url):
         self.url = url  
+        self.balise = []
         http = urllib3.PoolManager()
-        reponse = http.request('GET',self.url)
-        self.donnees = reponse.data
+        self.reponse = http.request('GET',self.url)
+        self.donnees = self.reponse.data
         self.donnees.decode('utf-8')
+               
+    def getStatus(self):
+        status = self.reponse.status
+        print(status)
 
     def parseContent(self):
-        pass
+        i = 0
+        j = 0
+        for i in self.donnees:
+            if self.donnees[i] != ">":
+                print("ok pour i")
+                self.balise[j].append(self.donnees[i])
+                i += 1
+            if self.donnees[i] == ">":
+                self.balise[j].append(self.donnees[i])
+                j += 1
+                i += 1
+            
+
 
     def drawContent(self):
         pass
@@ -28,7 +45,7 @@ class PageWeb:
 
     def showContent(self):
         textScreenWindow.delete('1.0', "end")
-        textScreenWindow.insert(1.0,self.donnees)
+        textScreenWindow.insert(1.0,self.parseContent())
         textScreenWindow.pack()
         labelScreenWindow = tk.Label(screenWindow, text='Resultat de la requete pour ' + self.url)
         labelScreenWindow.pack()
@@ -37,6 +54,7 @@ def analise():
     saisie_url = entry.get()
     pageWeb = PageWeb(saisie_url)
     pageWeb.showContent()
+    pageWeb.getStatus()
 
 
 ### FENETRE PRINCIPALE DU PROGRAMME
