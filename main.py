@@ -23,13 +23,12 @@ class PageWeb:
         j = 0
         for i, char in self.pageDecode:
             if self.pageDecode[i] != ">":
-                self.balise[j].append(self.pageDecode[i])
+                self.balise[j].extend(self.pageDecode[i])
                 i += 1
             if self.donnees[i] == ">":
-                self.balise[j].append(self.donnees[i])
+                self.balise[j].extend(self.pageDecode[i])
                 j += 1
                 i += 1
-        print(self.balise)    
 
 
     def drawContent(self):
@@ -43,8 +42,9 @@ class PageWeb:
 
     def showContent(self):
         textScreenWindow.delete('1.0', "end")
-        textScreenWindow.insert(1.0,self.parseContent())
+        textScreenWindow.insert(1.0,self.balise)
         textScreenWindow.pack()
+        labelScreenWindow = tk.Label(screenWindow, text='')
         labelScreenWindow = tk.Label(screenWindow, text='Resultat de la requete pour ' + self.url)
         labelScreenWindow.pack()
 
