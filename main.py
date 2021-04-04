@@ -7,13 +7,6 @@ from urllib3 import request
 from package.classes import PageWeb
 
 siteWeb=[]
-balises=[]
-def parseContent(page):
-    for i, char in page:
-        if i != '>':
-            balises.append(page[i])
-            i += 1
-    print(balises)
 
 
 def drawContent():
@@ -26,18 +19,17 @@ def showContent(content):
     textScreenWindow.delete('1.0', "end")
     textScreenWindow.insert(1.0,content)
     textScreenWindow.pack()
-    labelScreenWindow = tk.Label(screenWindow, text='')
-    # labelScreenWindow = tk.Label(screenWindow, text='Resultat de la requete pour ' + PageWeb.url)
-    labelScreenWindow.pack()
 
 def analise():
     saisie_url = entry.get()
     pageWeb = PageWeb(saisie_url)
     siteWeb.append(pageWeb)
     drawContent()
-    showContent(pageWeb.pageDecode)
-    parseContent(pageWeb.pageDecode)
-
+    showContent(pageWeb.title)
+    print(pageWeb.balises)
+    labelScreenWindow = tk.Label(screenWindow, text='')
+    labelScreenWindow = tk.Label(screenWindow, text='Resultat de la requete pour ' + pageWeb.url)
+    labelScreenWindow.pack()
 
 
 ### FENETRE PRINCIPALE DU PROGRAMME
@@ -57,8 +49,8 @@ labelUrl.pack()
 entry = tk.Entry (url_window, width= 60)
 
 ######################### url de test
-ur = 'ekleipsi-medias.fr'
-entry.insert(tk.END,ur)
+adresse = 'ekleipsi-medias.fr'
+entry.insert(tk.END,adresse)
 ####################################
 
 entry.pack()
