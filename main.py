@@ -3,56 +3,32 @@ import tkinter as tk
 import tkinter.scrolledtext as st
 import os
 import sys
-
 from urllib3 import request
+from package.classes import PageWeb
 
-class PageWeb:
-    def __init__(self, url):
-        self.url = url  
-        self.balise = []
-        http = urllib3.PoolManager()
-        self.reponse = http.request('GET',self.url)
-        self.donnees = self.reponse.data
-        self.pageDecode = self.donnees.decode('utf-8')
-               
-    def getStatus(self):
-        status = self.reponse.status
+siteWeb=[]
 
-    def parseContent(self):
-        i = 0
-        j = 0
-        for i, char in self.pageDecode:
-            if self.pageDecode[i] != ">":
-                self.balise[j].extend(self.pageDecode[i])
-                i += 1
-            if self.donnees[i] == ">":
-                self.balise[j].extend(self.pageDecode[i])
-                j += 1
-                i += 1
+def drawContent():
+    i=0
+    for i in siteWeb:
+        canvas.create_rectangle(100,100,400,150, fill="yellow")
 
 
-    def drawContent(self):
-        pass
-
-    def followLink(self):
-        pass
-
-    def getSeo(self):
-        pass
-
-    def showContent(self):
-        textScreenWindow.delete('1.0', "end")
-        textScreenWindow.insert(1.0,self.balise)
-        textScreenWindow.pack()
-        labelScreenWindow = tk.Label(screenWindow, text='')
-        labelScreenWindow = tk.Label(screenWindow, text='Resultat de la requete pour ' + self.url)
-        labelScreenWindow.pack()
+def showContent(content):
+    textScreenWindow.delete('1.0', "end")
+    textScreenWindow.insert(1.0,content)
+    textScreenWindow.pack()
+    labelScreenWindow = tk.Label(screenWindow, text='')
+    # labelScreenWindow = tk.Label(screenWindow, text='Resultat de la requete pour ' + PageWeb.url)
+    labelScreenWindow.pack()
 
 def analise():
     saisie_url = entry.get()
     pageWeb = PageWeb(saisie_url)
-    pageWeb.showContent()
-    pageWeb.getStatus()
+    siteWeb.append(pageWeb)
+    drawContent()
+    showContent(pageWeb.pageDecode)
+
 
 
 ### FENETRE PRINCIPALE DU PROGRAMME
@@ -71,10 +47,17 @@ entry.pack()
 ### bouton pour lancer la requette
 bouton_url = tk.Button(url_window, text="Analyser", command=analise)
 bouton_url.pack()
+### FENETRE CONTENANT LE CANVAS
+canvas = tk.Canvas(root, width="700", height="500", bg="grey")
+canvas.pack()
 ### FENETRE CONTENANT LE RESULTAT DE LA REQUETTE
 screenWindow = tk.Frame(root)
 screenWindow.pack()
 textScreenWindow= st.ScrolledText(screenWindow)
+
+
+
+
 
 
 
