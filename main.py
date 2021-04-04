@@ -7,6 +7,14 @@ from urllib3 import request
 from package.classes import PageWeb
 
 siteWeb=[]
+balises=[]
+def parseContent(page):
+    for i, char in page:
+        if i != '>':
+            balises.append(page[i])
+            i += 1
+    print(balises)
+
 
 def drawContent():
     i=0
@@ -28,31 +36,44 @@ def analise():
     siteWeb.append(pageWeb)
     drawContent()
     showContent(pageWeb.pageDecode)
+    parseContent(pageWeb.pageDecode)
 
 
 
 ### FENETRE PRINCIPALE DU PROGRAMME
 root = tk.Tk()
-root.geometry("720x600")
+root.geometry("1400x900")
 root.title("Analiseur de site web")
+
 ### FENETRE CONTENANT L'ENTREE DE L'URL DU SITE A ANALISER ET LE RESULTAT DE LA REQUETTE
 url_window =tk.Frame(root)
 url_window.pack()
+
 ### on crée une fenetre dans laquelle on affiche le status de la requette
 labelUrl= tk.Label (url_window, text="""Entrez l'URL du site à analiser""")
 labelUrl.pack()
+
 ### on demande la saisie de l'url du site à analiser
 entry = tk.Entry (url_window, width= 60)
+
+######################### url de test
+ur = 'ekleipsi-medias.fr'
+entry.insert(tk.END,ur)
+####################################
+
 entry.pack()
+
 ### bouton pour lancer la requette
 bouton_url = tk.Button(url_window, text="Analyser", command=analise)
 bouton_url.pack()
+
 ### FENETRE CONTENANT LE CANVAS
-canvas = tk.Canvas(root, width="700", height="500", bg="grey")
-canvas.pack()
+canvas = tk.Canvas(root, width="640", height="500", bg="grey")
+canvas.pack(side='right')
+
 ### FENETRE CONTENANT LE RESULTAT DE LA REQUETTE
-screenWindow = tk.Frame(root)
-screenWindow.pack()
+screenWindow = tk.Frame(root, width="640", height="500")
+screenWindow.pack(side='left')
 textScreenWindow= st.ScrolledText(screenWindow)
 
 
