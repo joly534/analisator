@@ -17,7 +17,7 @@ def drawContent():
 
 def showContent(content):
     textScreenWindow.delete('1.0', "end")
-    textScreenWindow.insert(1.0,content)
+    textScreenWindow.insert(1.0, content)
     textScreenWindow.pack()
 
 def analise():
