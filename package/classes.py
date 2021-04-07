@@ -1,30 +1,45 @@
-import urllib3
+import requests
 import tkinter as tk
-from urllib3 import request
 from bs4 import BeautifulSoup
 
 class PageWeb:
     def __init__(self, url):
-        self.url = url  
-        http = urllib3.PoolManager()
-        self.reponse = http.request('GET',self.url)
-        self.donnees = self.reponse.data
-        self.pageDecode = self.donnees.decode('utf-8')
-        self.page = BeautifulSoup(self.url, 'html.parser')
-        self.balises = self.page.prettify()
-        self.title = self.page.title
-               
-    def getStatus(self):
-        status = self.reponse.status
+        self.r = requests.get(url)  
+        self.html = self.r.text
+        self.soup = BeautifulSoup(self.html, 'html.parser')
+        self.pretty = self.soup.prettify()
+        self.title = self.soup.title.string
 
-    def drawContent(self):
+    def getLinks(self):
+        for link in self.html.find_all('a'):
+            links = link.get('href')
+            return links
+            
+    def getMenu(self):
+        for menu in self.soup.find_all('li'):
+            menus = menu.text
+            print(menus)
+
+    def getSEO(self):
         pass
+        
 
-    def followLink(self):
-        pass
+            
 
-    def getSeo(self):
-        pass
+class Rectangle:
+    def __init__(self, x, y, dx, dy, color):
+        self.x = x
+        self.y = y
+        self.dx = dx
+        self.dy = dy
+        self.color = color
+        self.tx = self.x + 40
+        self.ty = self.y + 20
 
+    def draw(self, canvas):
+        canvas.create_rectangle(self.x,self.y,self.dx,self.dy,fill=self.color)       
+
+    def textInside(self, canvas, title):
+        canvas.create_text ((self.tx, self.ty), text=title, anchor='w')
 
 
