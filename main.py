@@ -8,7 +8,7 @@ siteWeb=[]
 def analise():
     saisie_url = entry.get()
     pageWeb = PageWeb(saisie_url)
-    showContent(pageWeb.pretty, root)
+    showResult(pageWeb.pretty, saisie_url, root)
 
     # pageWeb.getMenu()
     # siteWeb.append(pageWeb.r)
