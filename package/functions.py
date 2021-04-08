@@ -12,26 +12,28 @@ def showMenu(root):
 
     ### BOUTON HTML
     bouton_html = tk.Button(menu, text="HTML", command=showHtml)
-    bouton_html.pack()
+    bouton_html.pack(side='left')
 
     ### BOUTON SEO
     bouton_seo = tk.Button(menu, text="SEO", command=showSeo)
-    bouton_seo.pack()
+    bouton_seo.pack(side='left')
 
     ### BOUTON LIENS
     bouton_liens = tk.Button(menu, text="LIENS", command=showLinks)
-    bouton_liens.pack()
+    bouton_liens.pack(side='left')
 
     ### BOUTON ORGANIGRAMME
     bouton_organigramme = tk.Button(menu, text="ORGANIGRAMME", command=showOrganigram)
-    bouton_organigramme.pack()
+    bouton_organigramme.pack(side='left')
 
 
 
 #AFFICHONS LE CODE HTML
 def showHtml(root, data):
     ### CREATION DE LA FENTETRE
-    htmlScreen = st.ScrolledText(root, text=data, width='1280', bg='grey')
+    htmlScreen = tk.Text(root, width='1200', bg='grey')
+    htmlScreen.delete(1.0, 'end')
+    htmlScreen.insert(1.0, data)
     htmlScreen.pack()
 
 #AFFICHONS LE SEO
@@ -39,13 +41,17 @@ def showSeo(root):
     pass
 
 #AFFICHONS LA LISTE DES LIENS
-def showLinks():
-    print('showLinks')
+def showLinks(root, data):
+    linkScreen = tk.Text(root)
+    linkScreen.pack()
+    for link in data.find_all('a'):
+        linkscreen.insert(1.0, 'href')
+
 
 #AFFICHONS L'ORGANIGRAMME
 def showOrganigram(root, title):
     ### FENETRE CONTENANT LE CANVAS
-    canvas = tk.Canvas(root, width="1280")
+    canvas = tk.Canvas(root, width="1200")
     canvas.pack()
     # COMMENCONS A DESSINER UN ORGANIGRAME
     def drawContent(title):
@@ -66,10 +72,11 @@ def showOrganigram(root, title):
 # AFFICHONS LE RESULTAT DANS LA FENETRE
 def showResult(content, url, root):
     ### FENETRE CONTENANT LE RESULTAT DE LA REQUETTE
-    resultWindow = tk.Frame(root, width="1280")
+    resultWindow = tk.Frame(root, width="1200")
     resultWindow.pack()
-    showMenu(resultWindow) 
-    showHtml(resultWindow, content) 
+    showLinks(root,content)
+    # showMenu(resultWindow) 
+    # showHtml(resultWindow, content) 
     labelScreenWindow = tk.Label(screenWindow, text='Resultat de la requete pour ' + url)
     labelScreenWindow.pack()         
 
