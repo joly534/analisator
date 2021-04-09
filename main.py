@@ -10,7 +10,7 @@ def analise():
     saisie_url = entry.get()
     pageWeb = PageWeb(saisie_url)
     # showResult(pageWeb.pretty, saisie_url, root)
-    showResult(pageWeb.getLinks, saisie_url, root)
+    showResult(pageWeb.soup, saisie_url, root)
 
     # pageWeb.getMenu()
     # siteWeb.append(pageWeb.r)
@@ -25,17 +25,17 @@ root.geometry('1200x600')
 url_window = tk.Frame(root)                                                 #
 url_window.pack()                                                           #
 labelUrl= tk.Label (url_window, text="""Entrez l'URL du site à analiser""") #
-labelUrl.pack(side='left')                                                             #
+labelUrl.pack(side='left')                                                  #
 ### DEMANDE DE SAISIE DE L'URL A ANALISER                                   #
 entry = tk.Entry (url_window, width= 60)                                    #
 ######################### URL DE TEST                                       #
 adresse = 'https://ekleipsi-medias.fr'                                      #
 entry.insert(tk.END,adresse)                                                #
 ####################################                                        #
-entry.pack(side='left')                                                                #
+entry.pack(side='left')                                                     #
 ### BOUTON POUR LANCER L'ANALISE                                            #
 bouton_url = tk.Button(url_window, text="Analyser", command=analise)        #
-bouton_url.pack(side='left')                                                           #
+bouton_url.pack(side='left')                                                #
 root.mainloop()                                                             #
 #############################################################################
 

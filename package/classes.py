@@ -9,6 +9,7 @@ class PageWeb:
         self.soup = BeautifulSoup(self.html, 'html.parser')
         self.pretty = self.soup.prettify()
         self.title = self.soup.title.string
+        self.code = self.r.status_code
 
     def getLinks(self):
         for link in self.html.find_all('a'):
