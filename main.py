@@ -16,15 +16,14 @@ def analise():
     # siteWeb.append(pageWeb.r)
     # drawContent(pageWeb.title)
 
-
 ### FENETRE PRINCIPALE DU PROGRAMME #########################################
 root = tk.Tk()                                                              #
 root.title("Analiseur de site web")                                         #
-root.geometry('1200x600')
+root.geometry('1200x600')                                                   #
 ### FENETRE CONTENANT LA DEMANDE DE SAISIE DE L'URL DU SITE                 #
 url_window = tk.Frame(root)                                                 #
 url_window.pack()                                                           #
-labelUrl= tk.Label (url_window, text="""Entrez l'URL du site à analiser""") #
+labelUrl= tk.Label (url_window, text="Entrez l'URL du site à analiser")     #
 labelUrl.pack(side='left')                                                  #
 ### DEMANDE DE SAISIE DE L'URL A ANALISER                                   #
 entry = tk.Entry (url_window, width= 60)                                    #

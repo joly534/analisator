@@ -2,8 +2,6 @@ import tkinter as tk
 import tkinter.scrolledtext as st
 from package.classes import PageWeb
 
-
-
 #AFFICHONS LE RESULTAT DE LA RECHERCHE
 def showMenu(root):
     ### MENU DE LA FENTERE DES RESULTATS
@@ -26,8 +24,6 @@ def showMenu(root):
     bouton_organigramme = tk.Button(menu, text="ORGANIGRAMME", command=showOrganigram)
     bouton_organigramme.pack(side='left')
 
-
-
 #AFFICHONS LE CODE HTML
 def showHtml(root, data):
     ### CREATION DE LA FENTETRE
@@ -39,8 +35,6 @@ def showHtml(root, data):
 #AFFICHONS LE SEO
 def showSeo(root):
     pass
-
-
 
 #AFFICHONS LA LISTE DES LIENS
 def showLinks(root, data):
@@ -54,7 +48,6 @@ def showLinks(root, data):
         numberOfLinks += 1    
     linkScreen.insert(1.0, 'Il y a ' + str(numberOfLinks) + ' liens sur cette page. \n \n')
 
-
 #AFFICHONS L'ORGANIGRAMME
 def showOrganigram(root, title):
     ### FENETRE CONTENANT LE CANVAS
@@ -66,15 +59,6 @@ def showOrganigram(root, title):
             rectangle = Rectangle(100,100,500,150,"yellow")
             rectangle.draw(canvas)
             rectangle.textInside(canvas, title)
-
-# def showResult(content, root):
-#     ### FENETRE CONTENANT LES RESULTATS DE LA REQUETTE
-#     screen_result = tk.Frame(root, width="1280", height="500", bg='grey')
-#     screen_result.pack()
-#     textScreenWindow= st.ScrolledText(screenWindow, width="1280")
-#     textScreenWindow.delete('1.0', "end")
-#     textScreenWindow.insert(1.0, content)
-#     textScreenWindow.pack()
 
 # AFFICHONS LE RESULTAT DANS LA FENETRE
 def showResult(content, url, root):
