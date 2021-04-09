@@ -22,10 +22,7 @@ class PageWeb:
             print(menus)
 
     def getSEO(self):
-        pass
-        
-
-            
+        pass           
 
 class Rectangle:
     def __init__(self, x, y, dx, dy, color):

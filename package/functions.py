@@ -2,28 +2,6 @@ import tkinter as tk
 import tkinter.scrolledtext as st
 from package.classes import PageWeb
 
-#AFFICHONS LE RESULTAT DE LA RECHERCHE
-def showMenu(root):
-    ### MENU DE LA FENTERE DES RESULTATS
-    menu = tk.Frame(root, bg='grey')
-    menu.pack()
-
-    ### BOUTON HTML
-    bouton_html = tk.Button(menu, text="HTML", command=showHtml)
-    bouton_html.pack(side='left')
-
-    ### BOUTON SEO
-    bouton_seo = tk.Button(menu, text="SEO", command=showSeo)
-    bouton_seo.pack(side='left')
-
-    ### BOUTON LIENS
-    bouton_liens = tk.Button(menu, text="LIENS", command=showLinks)
-    bouton_liens.pack(side='left')
-
-    ### BOUTON ORGANIGRAMME
-    bouton_organigramme = tk.Button(menu, text="ORGANIGRAMME", command=showOrganigram)
-    bouton_organigramme.pack(side='left')
-
 #AFFICHONS LE CODE HTML
 def showHtml(root, data):
     ### CREATION DE LA FENTETRE
@@ -65,9 +43,10 @@ def showResult(content, url, root):
     ### FENETRE CONTENANT LE RESULTAT DE LA REQUETTE
     resultWindow = tk.Frame(root, width="1200")
     resultWindow.pack()
-    showLinks(resultWindow,content)
-    # showMenu(resultWindow, content) 
-    # showHtml(resultWindow, content) 
+    showHtml(resultWindow, content) 
+    # showLinks(resultWindow,content)
+
+    
     labelScreenWindow = tk.Label(root, text='Resultat de la requete pour ' + url)
     labelScreenWindow.pack()         
 
