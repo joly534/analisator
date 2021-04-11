@@ -1,13 +1,16 @@
 import tkinter as tk
+import time
+from tkinter import ttk
 from package.classes import PageWeb
 
 #AFFICHONS LE CODE HTML
 def showhtml(root, data):
     ### CREATION DE LA FENTETRE
-    htmlScreen = tk.Text(root, width='1200', bg='grey')
+    htmlScreen = tk.Text(root, width='1200')
+    htmlScreen.pack()
+    root.add(htmlScreen, text="HTML")
     htmlScreen.delete(1.0, 'end')
     htmlScreen.insert(1.0, data)
-    htmlScreen.pack()
 
 #AFFICHONS LE SEO
 def showseo(root):
@@ -18,6 +21,7 @@ def showlinks(root, data):
     numberOfLinks = 0
     linkScreen = tk.Text(root, width="1200")
     linkScreen.pack()
+    root.add(linkScreen, text="Liens de la page")
     linkScreen.delete(1.0, 'end')
     for link in data.find_all('a'):
         pageweb = PageWeb(link.get('href'))
@@ -39,11 +43,13 @@ def showorganigram(root, title):
 
 # AFFICHONS LE RESULTAT DANS LA FENETRE
 def showresult(content, url, root):
+    analiseprogress = ttk.Progressbar(root, length=100, mode='determinate')
+    analiseprogress.pack()
     ### FENETRE CONTENANT LE RESULTAT DE LA REQUETTE
-    resultWindow = tk.Frame(root, width="1200")
+    resultWindow = ttk.Notebook(root, width="1200")
     resultWindow.pack()
     showhtml(resultWindow, content)
-    # showlinks(resultWindow,content)
+    #showlinks(resultWindow,content)
 
     
     labelScreenWindow = tk.Label(root, text='Resultat de la requete pour ' + url)
