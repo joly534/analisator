@@ -17,7 +17,7 @@ def analise():
                 " . \n Verifiez l'orthographe de l'Url que vous avez saisi ou contactez l'administrateur de ce site pour obtenir plus d'infos.")
         erreur.pack()
     else:
-        showresult(pageweb.soup, saisie_url, root, url_window)
+        showresult(pageweb.soup, saisie_url, root)
 
 
 #####################################################################################

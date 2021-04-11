@@ -46,11 +46,17 @@ def showorganigram(root, title):
             rectangle.draw(canvas)
             rectangle.textInside(canvas, title)
 
+def showprogressbar(root):
+    analiseprogress = ttk.Progressbar(root, length=100, mode='indeterminate')
+    analiseprogress.pack(side='top')
+    root.update_idletasks()
+
+
 # AFFICHONS LE RESULTAT DANS LA FENETRE
-def showresult(content, url, root, root_progress):
-    analiseprogress = ttk.Progressbar(root_progress, length=100, mode='determinate')
-    analiseprogress.pack(side='right')
+def showresult(content, url, root):
+    showprogressbar(root)
     ### FENETRE CONTENANT LE RESULTAT DE LA REQUETTE
+
     resultWindow = ttk.Notebook(root, width="1200")
     resultWindow.pack()
 
