@@ -11,13 +11,14 @@ def showhtml(root, data):
     htmlscreen = scrolledtext.ScrolledText(root, width='1200', bg='black', fg='white')
     htmlscreen.pack()
     htmlscreen.configure(font='System')
-    root.update_idletasks()
     time.sleep(0.1)
-
     # LIBELE DE LA FRAME
     root.add(htmlscreen, text="HTML")
     htmlscreen.delete(1.0, 'end')
     htmlscreen.insert(1.0, data)
+    root.update_idletasks()
+    progresshtml = ttk.Progressbar(htmlscreen, length=100, mode='indeterminate')
+    progresshtml.pack()
 
 
 # AFFICHONS LE SEO
@@ -27,7 +28,7 @@ def showseo(root):
 
 # AFFICHONS LA LISTE DES LIENS
 def showlinks(root, data):
-    linkscreen = tk.Text(root, width="1200")
+    linkscreen = scrolledtext.ScrolledText(root, width="1200")
     linkscreen.pack()
 
     # LIBELE DE LA FRAME
@@ -82,32 +83,26 @@ def showorganigram(root, data, title):
         root.update_idletasks()
         time.sleep(0.1)
 
-def showprogressbar(root):
-    analiseprogress = ttk.Progressbar(root, length=100, mode='indeterminate')
-    analiseprogress.pack(side='top')
-    root.update_idletasks()
-
 
 # AFFICHONS LE RESULTAT DANS LA FENETRE
-def showresult(content, url, root, title, soup):
-    showprogressbar(root)
+def showresult(content, url, root, title, soupe):
 
     # FENETRE CONTENANT LE RESULTAT DE LA REQUETTE
     resultWindow = ttk.Notebook(root, width="1200")
     resultWindow.pack()
 
     # ON AJOUTE L'ASYNCHRONE
-    th_html = threading.Thread(target=showhtml(resultWindow, content))
-    th_links = threading.Thread(target=showlinks(resultWindow, soup))
-    th_organigram = threading.Thread(target=showorganigram(resultWindow, soup, title))
+    #th_html = threading.Thread(target=showhtml(resultWindow, content))
+    th_links = threading.Thread(target=showlinks(resultWindow, soupe))
+    #th_organigram = threading.Thread(target=showorganigram(resultWindow, soupe, title))
 
-    th_html.start()
+    #th_html.start()
     th_links.start()
-    th_organigram.start()
+    #th_organigram.start()
 
-    th_html.join()
+    #th_html.join()
     th_links.join()
-    th_organigram.join()
+    #th_organigram.join()
 
     
     labelScreenWindow = tk.Label(root, text='Resultat de la requete pour ' + url)
