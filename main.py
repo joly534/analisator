@@ -12,12 +12,13 @@ def analise():
                 and saisie_url[4] != ":" and saisie_url[5] != "/" and saisie_url[6] != "/":
             saisie_url = head + saisie_url
     pageweb = PageWeb(saisie_url)
+    title = pageweb.title
     if pageweb.code != 200:
         erreur = tk.Label(root, text="La page web à l'adresse : " + saisie_url + " a renvoyé une erreur " + pageweb.code +
                 " . \n Verifiez l'orthographe de l'Url que vous avez saisi ou contactez l'administrateur de ce site pour obtenir plus d'infos.")
         erreur.pack()
     else:
-        showresult(pageweb.soup, saisie_url, root)
+        showresult(pageweb.soup, saisie_url, root, title)
 
 
 #####################################################################################
