@@ -38,30 +38,32 @@ def showlinks(root, data):
 #AFFICHONS L'ORGANIGRAMME
 def showorganigram(root, data, title):
     ### FENETRE CONTENANT LE CANVAS
-    canvas = tk.Canvas(root, width="1200")
+    canvas = tk.Canvas(root, width="1200", height="1000")
     canvas.pack()
-    #MODELE DE REFERENCE
-    pendingrectangle = Rectangle(700,50,850,100, "yellow")
+
+    #DESSINONS LES MODELES DE REFERENCE
+    pendingrectangle = Rectangle(800,50,950,90, "#ffd700")
     pendingrectangle.draw(canvas)
-    validaterectangle = Rectangle(700, 110, 850, 160, "green")
+    validaterectangle = Rectangle(800, 100, 950, 140, "#00ff00")
     validaterectangle.draw(canvas)
-    refusedrectangle = Rectangle(700, 170, 850, 220, "red")
+    refusedrectangle = Rectangle(800, 150, 950, 190, "#fe1b00")
     refusedrectangle.draw(canvas)
     validaterectangle.textinside(canvas, "Status OK" )
     pendingrectangle.textinside(canvas, "En cours...")
     refusedrectangle.textinside(canvas, "Erreur de lien")
+
     # COMMENCONS A DESSINER L'ORGANIGRAME
     x = 50
     y = 50
-    dx = 400
-    dy = 100
+    dx = 300
+    dy = 90
     for link in data.find_all('a'):
         titlelink = link.text
-        rectangle = Rectangle(x, y, dx, dy, "yellow")
+        rectangle = Rectangle(x, y, dx, dy, "#ffd700")
         rectangle.draw(canvas)
         rectangle.textinside(canvas, titlelink)
-        y += 60
-        dy += 150
+        y += 50
+        dy += 50
         root.update_idletasks()
         time.sleep(0.1)
 
