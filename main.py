@@ -25,7 +25,7 @@ def analise():
 ################## FENETRE PRINCIPALE DU PROGRAMME ##################################
 #####################################################################################
 root = tk.Tk()                                                                      #
-root.title("Analiseur de site web")                                                 #
+root.title("Analisator 3000")                                                 #
 root.geometry('1200x600+1650+100')                                                   #
 ### FENETRE CONTENANT LA DEMANDE DE SAISIE DE L'URL DU SITE                         #
 url_window = tk.Frame(root)                                                         #
