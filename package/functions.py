@@ -2,7 +2,7 @@ import tkinter as tk
 import time
 import threading
 from tkinter import ttk
-from package.classes import PageWeb
+from package.classes import PageWeb, Rectangle
 
 #AFFICHONS LE CODE HTML
 def showhtml(root, data):
@@ -35,13 +35,13 @@ def showlinks(root, data):
     linkScreen.insert(1.0, 'Il y a ' + str(numberOfLinks) + ' liens sur cette page. \n \n')
 
 #AFFICHONS L'ORGANIGRAMME
-def showorganigram(root, title):
+def showorganigram(root, data, title):
     ### FENETRE CONTENANT LE CANVAS
     canvas = tk.Canvas(root, width="1200")
     canvas.pack()
     # COMMENCONS A DESSINER UN ORGANIGRAME
     def drawcontent(title):
-        for i in siteWeb:
+        for link in data.find_all('a'):
             rectangle = Rectangle(100,100,500,150,"yellow")
             rectangle.draw(canvas)
             rectangle.textInside(canvas, title)
@@ -63,12 +63,15 @@ def showresult(content, url, root):
     # ON AJOUTE L'ASYNCHRONE
     th_html = threading.Thread(target=showhtml(resultWindow, content))
     th_links = threading.Thread(target=showlinks(resultWindow, content))
+    th_organigram = threading.Thread(target=showorganigram(resultWindow, content))
 
     th_html.start()
     th_links.start()
+    th_organigram.start()
 
     th_html.join()
     th_links.join()
+    th_organigram.join()
 
     
     labelScreenWindow = tk.Label(root, text='Resultat de la requete pour ' + url)
