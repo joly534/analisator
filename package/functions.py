@@ -1,17 +1,20 @@
 import tkinter as tk
 import time
 import threading
-from tkinter import ttk
+from tkinter import ttk, scrolledtext, font
 from package.classes import PageWeb, Rectangle
 
 
 # AFFICHONS LE CODE HTML
 def showhtml(root, data):
     # CREATION DE LA FENETRE
-    htmlscreen = tk.Text(root, width='1200')
+    htmlscreen = scrolledtext.ScrolledText(root, width='1200', bg='black', fg='white')
     htmlscreen.pack()
+    htmlscreen.configure(font='System')
     root.update_idletasks()
     time.sleep(0.1)
+
+    # LIBELE DE LA FRAME
     root.add(htmlscreen, text="HTML")
     htmlscreen.delete(1.0, 'end')
     htmlscreen.insert(1.0, data)
@@ -24,9 +27,10 @@ def showseo(root):
 
 # AFFICHONS LA LISTE DES LIENS
 def showlinks(root, data):
-    numberoflinks = 0
     linkscreen = tk.Text(root, width="1200")
     linkscreen.pack()
+
+    # LIBELE DE LA FRAME
     root.add(linkscreen, text="Liens de la page")
     linkscreen.delete(1.0, 'end')
     # LISTONS TOUS LES LIENS
@@ -35,8 +39,6 @@ def showlinks(root, data):
         linkscreen.insert(1.0, (link.get('href')) + ' ' + str(pageweb.code) + '\n')
         root.update_idletasks()
         time.sleep(0.1)
-        numberoflinks += 1
-    linkscreen.insert(1.0, 'Il y a ' + str(numberoflinks) + ' liens sur cette page. \n \n')
 
 
 # AFFICHONS L'ORGANIGRAMME
@@ -44,6 +46,10 @@ def showorganigram(root, data, title):
     # FENETRE CONTENANT LE CANVAS
     canvas = tk.Canvas(root, width="1200", height="1000", bg='black')
     canvas.pack()
+
+
+    # LIBELE DE LA FRAME
+    root.add(canvas, text="Organigramme")
 
     # DESSINONS LES MODELES DE REFERENCE
     pendingrectangle = Rectangle(1000,10,1150,50, "#ffd700")
@@ -83,7 +89,7 @@ def showprogressbar(root):
 
 
 # AFFICHONS LE RESULTAT DANS LA FENETRE
-def showresult(content, url, root, title):
+def showresult(content, url, root, title, soup):
     showprogressbar(root)
 
     # FENETRE CONTENANT LE RESULTAT DE LA REQUETTE
@@ -91,16 +97,16 @@ def showresult(content, url, root, title):
     resultWindow.pack()
 
     # ON AJOUTE L'ASYNCHRONE
-    # th_html = threading.Thread(target=showhtml(resultWindow, content))
-    # th_links = threading.Thread(target=showlinks(resultWindow, content))
-    th_organigram = threading.Thread(target=showorganigram(resultWindow, content, title))
+    th_html = threading.Thread(target=showhtml(resultWindow, content))
+    th_links = threading.Thread(target=showlinks(resultWindow, soup))
+    th_organigram = threading.Thread(target=showorganigram(resultWindow, soup, title))
 
-    # th_html.start()
-    # th_links.start()
+    th_html.start()
+    th_links.start()
     th_organigram.start()
 
-    # th_html.join()
-    # th_links.join()
+    th_html.join()
+    th_links.join()
     th_organigram.join()
 
     
