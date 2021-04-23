@@ -1,3 +1,4 @@
+#coding 
 from package.functions import *
 
 siteWeb = []
@@ -25,8 +26,8 @@ def analise():
 ################## FENETRE PRINCIPALE DU PROGRAMME ##################################
 #####################################################################################
 root = tk.Tk()                                                                      #
-root.title("Analisator 3000")                                                 #
-root.geometry('1200x600+0+0')                                                   #
+root.title("Analisator 3000")                                                       #
+root.geometry('1200x600+0+0')                                                       #
 ### FENETRE CONTENANT LA DEMANDE DE SAISIE DE L'URL DU SITE                         #
 url_window = tk.Frame(root)                                                         #
 url_window.pack()                                                                   #
