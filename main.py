@@ -1,10 +1,8 @@
 #coding 
 from package.functions import *
+from package.classes import *
 
-siteWeb = []
-
-
-# ANALISONS LE SITE WEB
+# ANALISONS L'URL
 def analise():
     head = "https://"
     saisie_url = entry.get()
@@ -16,12 +14,19 @@ def analise():
             
     pageweb = PageWeb(saisie_url)
     title = pageweb.title
+    
+    # FENETRE CONTENANT LE RESULTAT DE LA REQUETTE
+    resultWindow = ttk.Notebook(root, width="1200")
+    resultWindow.pack()
+
     if pageweb.code != 200:
         erreur = tk.Label(root, text="La page web à l'adresse : " + saisie_url + " a renvoyé une erreur " + pageweb.code +
                 " . \n Verifiez l'orthographe de l'Url que vous avez saisi ou contactez l'administrateur de ce site pour obtenir plus d'infos.")
         erreur.pack()
     else:
-        showresult(pageweb.pretty, saisie_url, root, title, pageweb.soup)
+        onglet = Onglet(resultWindow, title, pageweb.soup)
+    
+        #showresult(pageweb.pretty, saisie_url, root, title, pageweb.soup)
 
 
 #####################################################################################

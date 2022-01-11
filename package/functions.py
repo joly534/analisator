@@ -1,7 +1,7 @@
 import tkinter as tk
 import time
 import threading
-from tkinter import ttk, scrolledtext, font
+from tkinter import Label, ttk, scrolledtext, font
 from package.classes import PageWeb, Rectangle
 
 
@@ -28,7 +28,7 @@ def showseo(root):
 
 # AFFICHONS LA LISTE DES LIENS
 def showlinks(root, data):
-    linkscreen = scrolledtext.ScrolledText(root, width="1200")
+    linkscreen = Label(root, width="1200")
     linkscreen.pack()
 
     # LIBELE DE LA FRAME
@@ -74,7 +74,6 @@ def showorganigram(root, data, title):
     rectangle.draw(canvas)
     rectangle.textinside(canvas, title)
     for link in data.find_all('a'):
-        print(link)
         titlelink = link.text
         y += 50
         dy += 50

@@ -1,12 +1,28 @@
-from tkinter import scrolledtext
+from tkinter import Label, LabelFrame
+from typing import Text
+from package.functions import *
 import requests
 from bs4 import BeautifulSoup
 
 class Onglet:
-    def __init__(self, root):
-        resultScreen = scrolledtext.ScrolledText(root, width='1200', bg='black', fg='white')
-        resultScreen.pack()
-        resultScreen.configure(font='System')
+    def __init__(self, root, title, data):
+        #creation d'un onglet
+        self.resultScreen = Label(root, width='1200', fg='black')
+        self.resultScreen.pack()
+        #configuration de la typo
+        self.resultScreen.configure(font='System')
+        #ajout de l'onglet a la fenetre
+        root.add(self.resultScreen, text=title)
+
+        #ajout de la partie sur le nombre de liens
+        self.labelLinksFrame = LabelFrame(self.resultScreen, text='Liens présents sur cette page : ', height='300')
+        self.labelLinksFrame.pack( fill="both", expand="yes")
+        showLinks(self.labelLinksFrame, data)
+
+        #ajout de la partie sur le SEO
+        self.labelSEOFrame = LabelFrame(self.resultScreen, text='SEO de la page : ', height='300')
+        self.labelSEOFrame.pack( fill="both", expand="yes")
+
 
 class PageWeb:
     def __init__(self, url):
