@@ -16,8 +16,7 @@ class Onglet:
 
         #ajout de la partie sur le nombre de liens
         self.labelLinksFrame = LabelFrame(self.resultScreen, text='Liens présents sur cette page : ', height='300')
-        self.labelLinksFrame.pack( fill="both", expand="yes")
-        showLinks(self.labelLinksFrame, data)
+        self.labelLinksFrame.pack( fill="both", expand="yes") 
 
         #ajout de la partie sur le SEO
         self.labelSEOFrame = LabelFrame(self.resultScreen, text='SEO de la page : ', height='300')

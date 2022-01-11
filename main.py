@@ -25,6 +25,7 @@ def analise():
         erreur.pack()
     else:
         onglet = Onglet(resultWindow, title, pageweb.soup)
+        showlinks(onglet.labelLinksFrame, pageweb.soup)
     
         #showresult(pageweb.pretty, saisie_url, root, title, pageweb.soup)
 

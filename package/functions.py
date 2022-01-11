@@ -28,17 +28,14 @@ def showseo(root):
 
 # AFFICHONS LA LISTE DES LIENS
 def showlinks(root, data):
-    linkscreen = Label(root, width="1200")
-    linkscreen.pack()
-
-    # LIBELE DE LA FRAME
-    root.add(linkscreen, text="Liens de la page")
-    linkscreen.delete(1.0, 'end')
-    # LISTONS TOUS LES LIENS
+    # LISTONS TOUS LES LIENS    
     for link in data.find_all('a'):
         pageweb = PageWeb(link.get('href'))
-        linkscreen.insert(1.0, (link.get('href')) + ' ' + str(pageweb.code) + '\n')
-        root.update_idletasks()
+        contentLinks = (link.get('href')) + ' ' + str(pageweb.code) + '\n'
+        lbl = Label(root, text=contentLinks)
+        lbl.pack()
+        #root.insert(1.0, (link.get('href')) + ' ' + str(pageweb.code) + '\n')
+        lbl.update_idletasks()
         time.sleep(0.1)
 
 
