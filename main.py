@@ -8,10 +8,12 @@ siteWeb = []
 def analise():
     head = "https://"
     saisie_url = entry.get()
+
     for char in saisie_url:
         if saisie_url[0] != "h" and saisie_url[1] != "t" and saisie_url[2] != "t" and saisie_url[3] != "p" \
-                and saisie_url[4] != ":" and saisie_url[5] != "/" and saisie_url[6] != "/":
+           and saisie_url[4] != ":" and saisie_url[5] != "/" and saisie_url[6] != "/":
             saisie_url = head + saisie_url
+            
     pageweb = PageWeb(saisie_url)
     title = pageweb.title
     if pageweb.code != 200:

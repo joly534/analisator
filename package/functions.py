@@ -74,6 +74,7 @@ def showorganigram(root, data, title):
     rectangle.draw(canvas)
     rectangle.textinside(canvas, title)
     for link in data.find_all('a'):
+        print(link)
         titlelink = link.text
         y += 50
         dy += 50
@@ -93,15 +94,15 @@ def showresult(content, url, root, title, soupe):
 
     # ON AJOUTE L'ASYNCHRONE
     th_html = threading.Thread(target=showhtml(resultWindow, content))
-    th_links = threading.Thread(target=showlinks(resultWindow, soupe))
+    #th_links = threading.Thread(target=showlinks(resultWindow, soupe))
     th_organigram = threading.Thread(target=showorganigram(resultWindow, soupe, title))
 
     th_html.start()
-    th_links.start()
+    #th_links.start()
     th_organigram.start()
 
     th_html.join()
-    th_links.join()
+    #th_links.join()
     th_organigram.join()
 
     

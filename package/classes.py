@@ -1,6 +1,12 @@
+from tkinter import scrolledtext
 import requests
 from bs4 import BeautifulSoup
 
+class Onglet:
+    def __init__(self, root):
+        resultScreen = scrolledtext.ScrolledText(root, width='1200', bg='black', fg='white')
+        resultScreen.pack()
+        resultScreen.configure(font='System')
 
 class PageWeb:
     def __init__(self, url):
@@ -14,7 +20,6 @@ class PageWeb:
     def getmenu(self):
         for menu in self.soup.find_all('li'):
             menus = menu.text
-            print(menus)
 
     def getseo(self):
         pass           
