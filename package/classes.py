@@ -1,4 +1,4 @@
-from tkinter import Label, LabelFrame
+from tkinter import Label, LabelFrame, Scrollbar, Listbox
 from typing import Text
 from package.functions import *
 import requests
@@ -7,13 +7,20 @@ from bs4 import BeautifulSoup
 class Onglet:
     def __init__(self, root, title, data):
         #creation d'un onglet
-        self.resultScreen = Label(root, width='1200', fg='black')
+        self.resultScreen = Listbox(root, width='1200', fg='black')
         self.resultScreen.pack()
+
+        #ajout de la barre de scroll
+        self.scroll = Scrollbar(self.resultScreen, command=self.resultScreen.yview)
+        self.scroll.pack()
+
         #configuration de la typo
         self.resultScreen.configure(font='System')
+        self.resultScreen.configure(yscrollcommand=self.scroll.set)
+
         #ajout de l'onglet a la fenetre
         root.add(self.resultScreen, text=title)
-
+        
         #ajout de la partie sur le nombre de liens
         self.labelLinksFrame = LabelFrame(self.resultScreen, text='Liens présents sur cette page : ', height='300')
         self.labelLinksFrame.pack( fill="both", expand="yes") 
